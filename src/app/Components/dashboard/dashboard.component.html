@@ -1,42 +1,67 @@
+<h1 class="text-white" style="text-align:center; text-justify: auto; height: 100px; background-color:rgb(89, 123, 232); font-size:80px;">Cineplex</h1>
+<header>
+  <nav class="navbar navbar-expand-lg" style="background-color: rgb(244, 70, 47);">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item p1">
+            <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item p2">
+            <a class="nav-link text-white" href="LoginComponent">LogIn</a>
+          </li>
+          <li class="nav-item p3">
+            <a class="nav-link text-white" href="#">SignUp</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
 <div class="container-fluid p-0 m-0 bg-light">
     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" *ngIf="latestMoviesData">
 
         <div class="row mt-3 pt-2 px-2 text-white" style="background-color: rgb(21, 86, 229);">
             <h2>Now Playing Movies</h2>
-            <div class="col-md-2 mt-3" *ngFor="let movies of NowPlayingMoviesData?.results; let i=index">
-                <div class="card bg-light" *ngIf="i<5" style="height: 20rem;">
+            <div class="col-md-3 mt-3" *ngFor="let movies of NowPlayingMoviesData?.results; let i=index">
+                <div class="card bg-light" *ngIf="i<4" style="height: 600px;">
                   <img src="{{ movies.backdrop_path }}" class="card-img-top" alt="images"/>
                   <div class="card-body">
                     <h5 class="card-title text-info">{{movies.title}}</h5>
-                    <p><span class="text-warning">Rating</span>:{{movies.vote_average}}</p>
-                    <p>Language: <span class="p-1" style="background-color: azure;"><b>{{movies.original_language}}</b></span></p>
-                    <button class="btn text-white bg-dark">Book Ticket</button>
+                    <p><span class="text-info">Overview: </span><i>{{movies.overview}}</i></p>
+                    <p><span class="text-info">Release Date:</span> <span class="p-1" style="background-color: azure;"><b>{{movies.release_date}}</b></span></p>
+                    <p><span class="text-warning" style="background-color: azure;">Rating</span>: {{movies.vote_average}}</p>
+                    <p><span class="text-info">Language:</span> <span class="p-1" style="background-color: azure;"><b>{{movies.original_language}}</b></span></p>
+                    <button class="btn text-white" style="background: red;">Book Ticket</button>
                   </div>
                 </div>
             </div>
         </div>
         <div class="row mt-3 pt-2 px-2 text-white" style="background-color: rgb(250, 234, 61);">
           <h2>Trending Movies</h2>
-          <div class="col-md-2 mt-3" *ngFor="let movies of TrendingMoviesData?.results; let i=index">
-              <div class="card bg-light" *ngIf="i<5" style="height: 20rem;">
+          <div class="col-md-3 mt-3" *ngFor="let movies of TrendingMoviesData?.results; let i=index">
+              <div class="card bg-light" *ngIf="i<4" style="height: 600px;">
                 <img src="{{ movies.backdrop_path }}" class="card-img-top" alt="images"/>
                 <div class="card-body">
                   <h5 class="card-title text-info">{{movies.title}}</h5>
-                  <p><span class="text-warning">Rating</span>:{{movies.vote_average}}</p>
-                  <p>Language: <span class="p-1" style="background-color: azure;"><b>{{movies.original_language}}</b></span></p>
+                  <p><span class="text-info">Overview: </span><i>{{movies.overview}}</i></p>
+                  <p><span class="text-info">Release Date:</span> <span class="p-1" style="background-color: azure;"><b>{{movies.release_date}}</b></span></p>
+                  <p><span class="text-warning" style="background-color: azure;">Rating</span>: {{movies.vote_average}}</p>
+                  <p><span class="text-info">Language:</span> <span class="p-1" style="background-color: azure;"><b>{{movies.original_language}}</b></span></p>
                 </div>
               </div>
           </div>
       </div>
       <div class="row mt-3 pt-2 px-2 text-white" style="background-color: rgb(49, 171, 247);">
         <h2>Upcoming Movies</h2>
-        <div class="col-md-2 mt-3" *ngFor="let movies of UpcomingMoviesData?.results; let i=index">
-            <div class="card bg-light" *ngIf="i<5" style="height: 20rem;">
+        <div class="col-md-3 mt-3" *ngFor="let movies of UpcomingMoviesData?.results; let i=index">
+            <div class="card bg-light" *ngIf="i<4" style="height: 500px;">
               <img src="{{ movies.backdrop_path }}" class="card-img-top" alt="images"/>
-              <div class="card-body">
+              <div class="card-body" style="height: auto;">
                 <h5 class="card-title text-info">{{movies.title}}</h5>
-                <p><span class="text-warning">Rating</span>:{{movies.vote_average}}</p>
-                <p>Language: <span class="p-1" style="background-color: azure;"><b>{{movies.original_language}}</b></span></p>
+                <p><span class="text-info">Overview: </span><i>{{movies.overview}}</i></p>
+                <p><span class="text-info">Language:</span> <span class="p-1" style="background-color: azure;"><b>{{movies.original_language}}</b></span></p>
               </div>
             </div>
         </div>

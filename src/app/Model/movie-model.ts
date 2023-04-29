@@ -1,9 +1,6 @@
 export interface MovieInterface {
     dates: Date;
-    page: number;
     results?: (ResultEntity)[] | null;
-    total_pages: number;
-    total_results: number;
 }
 
 export interface Dates {
@@ -13,9 +10,8 @@ export interface Dates {
 
 export interface ResultEntity {
     name:string;
-    adult: boolean;
     backdrop_path: string;
-    genre_ids?: (number)[] | null;
+    genres: Genre[];
     id: number;
     original_language: string;
     original_title: string;
@@ -24,7 +20,11 @@ export interface ResultEntity {
     poster_path: string;
     release_date: string;
     title: string;
-    video: boolean;
     vote_average: number;
     vote_count: number;
+    region:string;
 }
+export interface Genre {
+    id: number
+    name: string
+  }
