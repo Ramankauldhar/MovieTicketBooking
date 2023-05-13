@@ -12,7 +12,7 @@ export interface ResultEntity {
     name:string;
     backdrop_path: string;
     genres: Genre[];
-    id: number;
+    id: string;
     original_language: string;
     original_title: string;
     overview: string;
@@ -25,6 +25,5 @@ export interface ResultEntity {
     region:string;
 }
 export interface Genre {
-    id: number
     name: string
   }

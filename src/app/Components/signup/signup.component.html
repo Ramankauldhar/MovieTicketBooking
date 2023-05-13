@@ -1,1 +1,30 @@
-<p>signup works!</p>
+<div class="container mt-10 bg-light">
+    <div class="row justify-content-center mt-10">
+        <div class="col-md-6 mt-10">
+            <div class="card shadow-lg p-5 mt-10 mb-10 card">
+                <h1 style="text-align: center; justify-content: center;">Register</h1>
+                
+                <div [ngClass]="className" role="alert">
+                    {{message}} <a routerLink="/login" style="cursor: pointer;">Login Here</a>
+                </div>
+
+                <form [formGroup] = "registerForm">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Full Name</label>
+                        <input type="text" formControlName="fullName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" formControlName="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" formControlName="pswd" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <button type="submit" class="btn btn-success" style="margin-left: 40%;" (click)="register()">Register</button>
+                    <p style="text-align: center;">Already have an account? <a routerLink="/login">Login here</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

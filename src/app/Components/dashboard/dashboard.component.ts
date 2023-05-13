@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
   NowPlayingMoviesData !: MovieInterface;
   TrendingMoviesData !: MovieInterface;
   UpcomingMoviesData !: MovieInterface;
+  Movie !: MovieInterface;
 
   constructor(private fetchData : FetchDataService){}
 
@@ -27,6 +28,13 @@ export class DashboardComponent implements OnInit {
   getLatestMoviesList() {
     this.fetchData.getLatestMoviesList().subscribe(res =>{
       this.latestMoviesData = this.checkResult(res);
+    }, err => {
+      console.log("Unable to fetch LatestMovies Data.", err);
+    })
+  }
+  getMovie(id:number){
+    this.fetchData.getMovie(id).subscribe(res =>{
+      this.Movie = this.checkResult(res);
     }, err => {
       console.log("Unable to fetch LatestMovies Data.", err);
     })

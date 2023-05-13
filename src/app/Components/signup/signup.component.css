@@ -1,0 +1,22 @@
+button{
+    text-align: center;
+    justify-content: center;
+    margin-left: 50%;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+label{
+    color: antiquewhite;
+    margin-top:10px;
+    font-size: 20px;
+}
+.card{
+    padding: 50px;
+    background-color: rgb(117, 151, 214);
+}
+h1{
+    text-align: center; 
+    color: antiquewhite;
+}

@@ -1,1 +1,24 @@
-<p>login works!</p>
+<div class="container mt-10 bg-light">
+    <div class="row justify-content-center mt-10">
+        <div class="col-md-6 mt-10">
+            <div class="card shadow-lg p-5 mt-10 mb-10 card">
+                <h1 style="text-align: center; justify-content: center;">Login</h1>
+                    <form [formGroup]="loginForm">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" formControlName="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <input type="password" formControlName="pswd" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <a routerLink="/Login" style="cursor: pointer;">Forget Password?</a> <br/>
+                    
+                        <button type="submit" style="margin-left: 40%; margin-bottom: 10px;" class="btn btn-success" (click)="login()">Login</button>
+                        <p style="text-align: center;">Don't you have an account? <a routerLink="/signup">Register here</a></p>
+                        
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -15,6 +15,9 @@ export class FetchDataService {
   getLatestMoviesList() : Observable<any>{
     return this.http.get<any>(this.url+'/movie/latest?api_key='+ environment.api_key);
   }
+  getMovie(id:number){
+    return this.http.get<any>(this.url+`/movie/latest/${id}?api_key=`+environment.api_key);
+  }
   getNowPlayingMoviesList() : Observable<MovieInterface>{
     return this.http.get<MovieInterface>(this.url+'/movie/now_playing?api_key='+ environment.api_key);
   }

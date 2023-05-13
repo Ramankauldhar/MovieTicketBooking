@@ -1,24 +1,3 @@
-<h1 class="text-white" style="text-align:center; text-justify: auto; height: 100px; background-color:rgb(89, 123, 232); font-size:80px;">Cineplex</h1>
-<header>
-  <nav class="navbar navbar-expand-lg" style="background-color: rgb(244, 70, 47);">
-    <div class="container-fluid">
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item p1">
-            <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item p2">
-            <a class="nav-link text-white" href="LoginComponent">LogIn</a>
-          </li>
-          <li class="nav-item p3">
-            <a class="nav-link text-white" href="#">SignUp</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header>
-
 <div class="container-fluid p-0 m-0 bg-light">
     <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel" *ngIf="latestMoviesData">
 
@@ -33,7 +12,9 @@
                     <p><span class="text-info">Release Date:</span> <span class="p-1" style="background-color: azure;"><b>{{movies.release_date}}</b></span></p>
                     <p><span class="text-warning" style="background-color: azure;">Rating</span>: {{movies.vote_average}}</p>
                     <p><span class="text-info">Language:</span> <span class="p-1" style="background-color: azure;"><b>{{movies.original_language}}</b></span></p>
-                    <button class="btn text-white" style="background: red;">Book Ticket</button>
+                     <form method="post" action="">
+                      <button type="submit" class="btn text-white btn-success" routerLink="/bookticket/{{movies.id}}">Book Ticket</button>
+                    </form>
                   </div>
                 </div>
             </div>
