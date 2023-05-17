@@ -3,6 +3,10 @@
         <div class="col-md-6 mt-10">
             <div class="card shadow-lg p-5 mt-10 mb-10 card">
                 <h1 style="text-align: center; justify-content: center;">Login</h1>
+
+                <div [ngClass]="className" role="alert">
+                    {{message}}
+                </div>
                     <form [formGroup]="loginForm">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
