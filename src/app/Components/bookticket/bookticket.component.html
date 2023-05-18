@@ -1,144 +1,155 @@
-<div class="container">
-    <div class="column1">
-        <img src="" class="" alt="images"/>
-        <h5 class="card-title text-info"></h5>
-        <label>Overview:</label> <br>
-        <label>Show Timings:</label><br>
-        <div class="time">09:00AM</div>
-        <div class="time">12:00PM</div>
-        <div class="time">04:00PM</div>
-        <div class="time">10:30PM</div>
-        <br><hr>
-        <label>Select a show time: </label>
-        <select name="tickets" id="showTime">
-            <option value="09:00AM">09:00AM</option>
-            <option value="12:00AM">12:00AM</option>
-            <option value="04:00AM">04:00AM</option>
-            <option value="10:30AM">10:30AM</option>
-        </select><br>
-        <label>Number of Tickets:</label>
-        <select name="tickets" id="tickets" ngModel="ticketNumber">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select><br>
-        <label>Ticket Price: </label><span>$20/Ticket</span><br>
-        <label>Total Price: </label> {{90}}<br>
-        <button>Book Ticket</button>
-    </div>
-    <div class="column2">
-         <label>Select Seat Number: </label>
-         <ul class="showcase">
-            <li>
-                <div class="seat"></div>
-                <small>Not Selected</small>
-            </li>
-            <li>
-                <div class="seat Selected"></div>
-                <small>Selected</small>
-            </li>
-            <li>
-                <div class="seat Occupied"></div>
-                <small>Already Occupied</small>
-            </li>
-         </ul>
-         <div>
-            <div class="row">
-                <div class="seat1" ng-model="seat"></div>
-                <div class="seat1" ng-model="2A"></div>
-                <div class="seat1" ng-model="3A"></div>
-                <div class="seat1" ng-model="4A"></div>
-                <div class="seat1" ng-model="5A"></div>
-                <div class="seat1" ng-model="6A"></div>
-                <div class="seat1" ng-model="7A"></div>
-                <div class="seat1" ng-model="8A"></div>
-                <div class="seat1" ng-model="9A"></div>
-                <div class="seat1" ng-model="10A"></div>
-            </div>
-            <div class="row">
-                <div class="seat1"></div>
-                <div class="seat1"></div>
-                <div class="seat1"></div>
-                <div class="seat1"></div>
-                <div class="seat1"></div>
-                <div class="seat1"></div>
-                <div class="seat1"></div>
-                <div class="seat1"></div>
-                <div class="seat1"></div>
-                <div class="seat1"></div>
-            </div>
-            <div class="row row3">
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-            </div>
-            <div class="row">
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-            </div>
-            <div class="row">
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-            </div>
-            <div class="row">
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-            </div>
-            <div class="row">
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-                <div class="seat"></div>
-            </div>
-            <p class="text">You have selected: {{"1A"}}</p>
-       
-    </div>      
+<h1 style="background-color: aliceblue; text-align: center;">Ticket Booking</h1>
 
-</div>  
-           
-                   
-                    
+<div class="container1">
+    
+        <div class="container">
+        <div class="column1">
+            <form [formGroup] = "ticketBookingForm">
+                <div [ngClass]="className" role="alert">
+                    {{message}} <a routerLink="/login" style="cursor: pointer;">Login Here</a>
+                </div>
+            <h2 name="title" class="card-title text-white">Movie Name</h2>
+            <label>Overview:</label> <br>
+            <p name="overview">This movie is registered with us only.</p>
+            <label>Show Timings:</label><br>
+            <div class="time">09:00AM</div>
+            <div class="time">12:00PM</div>
+            <div class="time">04:00PM</div>
+            <div class="time">10:30PM</div>
+            <br>
+            <hr>
+            <label>Select a show time: </label>
+            <select name="tickets" id="showTime">
+                <option value="09:00AM">09:00AM</option>
+                <option value="12:00AM">12:00AM</option>
+                <option value="04:00AM">04:00AM</option>
+                <option value="10:30AM">10:30AM</option>
+            </select><br>
+            <label>Number of Tickets:</label>
+            <select name="tickets" id="tickets" (change)="ticketSelectedChange($event)">
+                <option value="0">Select</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select><br>
+            <label>Ticket Price: </label><span>$20/Ticket</span><br>
+            <label style="color: brown; background-color: green; font-size: 25px;">Total Price: $ <b><span id="total" style="font-size: 25px;"></span></b></label><br> 
+            <label>Seat Number: </label><span id="text"></span><br>
+            <label>Name</label>
+            <button (click)="booking()">Book Ticket</button>
+            </form>
+        </div>
+        <div class="column2">
+            <label>Select Seat Number: </label>
+            <ul class="showcase">
+                <li>
+                    <div class="seat"></div>
+                    <small>Not Selected</small>
+                </li>
+                <li>
+                    <div class="seat Selected"></div>
+                    <small>Selected</small>
+                </li>
+                <li>
+                    <div class="seat Occupied"></div>
+                    <small>Already Occupied</small>
+                </li>
+            </ul>
+
+            <div class = "seatsContainer">
+                <div class="row">
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat Occupied"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                </div>
+                <div class="row">
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat Occupied"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                </div>
+                <div class="row">
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                </div>
+                <div class="row">
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                </div>
+                <div class="row">
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                </div>
+                <div class="row">
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                </div>
+                <div class="row">
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                    <div class="seat"></div>
+                </div>
+                <label>You have selected <span id="countS" style="color:antiquewhite; background-color:brown; font-size: 30px;"></span> Seats</label>
+            </div>
+            </div>
+</div>
+    

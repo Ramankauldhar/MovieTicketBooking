@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FetchDataService } from 'src/app/Services/fetch-data.service';
 import { environment } from 'src/environments/environment';
 import {MovieInterface} from '../../Model/movie-model';
+import { ActivatedRoute } from '@angular/router';
+import { FormGroup , FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,20 +11,28 @@ import {MovieInterface} from '../../Model/movie-model';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+  movieForm!:FormGroup
+  
   latestMoviesData : any;
   NowPlayingMoviesData !: MovieInterface;
   TrendingMoviesData !: MovieInterface;
   UpcomingMoviesData !: MovieInterface;
   Movie !: MovieInterface;
 
-  constructor(private fetchData : FetchDataService){}
+  constructor(private fetchData : FetchDataService, private route: ActivatedRoute, private formBuilder: FormBuilder){}
 
   ngOnInit(): void{
     this.getLatestMoviesList();
     this.getNowPlayingMoviesList();
     this.getTrendingMoviesList();
     this.getUpcomingMoviesList();
+
+    this.route.params.subscribe(params => {
+      const movieId = params['id'];
+  
+      // Use the movieId as needed
+      console.log('Movie ID:', movieId);
+    });
   }
 
   getLatestMoviesList() {
@@ -82,4 +92,5 @@ export class DashboardComponent implements OnInit {
       console.log("Unable to fetch UpcomingMovies Data.", err);
     })
   }
+
 }

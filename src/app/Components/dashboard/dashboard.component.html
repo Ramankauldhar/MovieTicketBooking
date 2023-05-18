@@ -7,13 +7,13 @@
                 <div class="card bg-light" *ngIf="i<4" style="height: 600px;">
                   <img src="{{ movies.backdrop_path }}" class="card-img-top" alt="images"/>
                   <div class="card-body">
-                    <h5 class="card-title text-info">{{movies.title}}</h5>
-                    <p><span class="text-info">Overview: </span><i>{{movies.overview}}</i></p>
-                    <p><span class="text-info">Release Date:</span> <span class="p-1" style="background-color: azure;"><b>{{movies.release_date}}</b></span></p>
-                    <p><span class="text-warning" style="background-color: azure;">Rating</span>: {{movies.vote_average}}</p>
-                    <p><span class="text-info">Language:</span> <span class="p-1" style="background-color: azure;"><b>{{movies.original_language}}</b></span></p>
-                     <form method="post" action="">
-                      <button type="submit" class="btn text-white btn-success" routerLink="/bookticket/{{movies.id}}">Book Ticket</button>
+                    <form [action]="'/bookticket/' + movies.id" method="get" [formGroup]="movieForm">
+                      <h5 class="card-title text-info">{{movies.title}}</h5>
+                      <p><span class="text-info">Overview: </span><i>{{movies.overview}}</i></p>
+                      <p><span class="text-info">Release Date:</span> <span class="p-1" style="background-color: azure;"><b>{{movies.release_date}}</b></span></p>
+                      <p><span class="text-warning" style="background-color: azure;">Rating</span>: {{movies.vote_average}}</p>
+                      <p><span class="text-info">Language:</span> <span class="p-1" style="background-color: azure;"><b>{{movies.original_language}}</b></span></p>
+                      <button type="submit" class="btn text-white btn-success" routerLink="/bookticket">Book Ticket</button>
                     </form>
                   </div>
                 </div>

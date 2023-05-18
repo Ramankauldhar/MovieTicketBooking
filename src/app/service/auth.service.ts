@@ -9,9 +9,12 @@ export class AuthService {
 
   constructor(private http:HttpClient) { }
   register(data:any):Observable<any>{
-    return this.http.post('http://localhost:8028/auth/register', data);
+    return this.http.post('http://localhost:8022/auth/register', data);
   }
   login(data:any):Observable<any>{
-    return this.http.post('http://localhost:8028/auth/login',data);
+    return this.http.post('http://localhost:8022/auth/login',data);
+  }
+  booking(data:any):Observable<any>{
+    return this.http.post('http://localhost:8022/auth/bookticket',data);
   }
 }

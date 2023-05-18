@@ -12,6 +12,7 @@ const routes: Routes = [
   {path:'login', component:LoginComponent},
   {path:'signup', component:SignupComponent},
   {path:'bookticket', component:BookticketComponent},
+  {path: 'bookticket/:id', component:BookticketComponent},
   {path:'profile', component:ProfileComponent},
 ];
 
