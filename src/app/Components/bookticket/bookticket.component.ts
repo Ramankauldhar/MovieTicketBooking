@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AuthService } from 'src/app/service/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';';pl,.p'
 
 @Component({
   selector: 'app-bookticket',
@@ -10,6 +12,11 @@ import { AuthService } from 'src/app/service/auth.service';
 export class BookticketComponent implements OnInit{
 
   ticketBookingForm!:FormGroup
+  selectedSeats: number[] = [];
+
+  movieImage!: string | null;
+  movieOverview!: string | null;
+  movieTitle!: string | null;
 
   message: String = "";
   isProcess: boolean = false;
@@ -25,15 +32,17 @@ export class BookticketComponent implements OnInit{
   text!: HTMLElement;
 
 
-  constructor(private formBuilder: FormBuilder, private auth:AuthService){
+  constructor(private formBuilder: FormBuilder,
+     private auth:AuthService, 
+     private route:ActivatedRoute, 
+     private router:Router,
+     private http:HttpClient)
+    {
     this.ticketBookingForm = this.formBuilder.group(
       {
         'email':['', Validators.required],
-        'movieTitle':['', Validators.required],
         'showTime':['', Validators.required],
         'noOfTickets':['', Validators.required],
-        'totalPrice':['', Validators.required],
-        'seats':['', Validators.required]
       }
     )
   }
@@ -49,10 +58,20 @@ export class BookticketComponent implements OnInit{
     this.populateUI();
     this.updateSelectedCount();
     this.seatsContainer.addEventListener("click", this.handleSeatClick);
+
+    this.route.queryParamMap.subscribe((params) => {
+      this.movieImage = params.get('movieImage') || '';
+      this.movieOverview = params.get('movieOverview') || '';
+      this.movieTitle = params.get('movieTitle') || '';
+    });
   }
 
-  updateSelectedCount(){
+  
+  updateSelectedCount(): void{
     const seatSelected = document.querySelectorAll('.row .seat.Selected');
+    this.selectedSeats = Array.from(seatSelected).map(seat => {
+      return Array.from(document.querySelectorAll('.seat')).indexOf(seat);
+    });
 
     const seatCount = seatSelected.length;
     const seatIndex = Array.from(seatSelected).map(function(seat){
@@ -87,27 +106,37 @@ export class BookticketComponent implements OnInit{
     this.updateSelectedCount();
   }
 
-  booking(){
-    const data = this.ticketBookingForm.value;
-    delete data['confirm']
-    this.auth.booking(data).subscribe(res=>{
-      //if success, 200 code will be returned
-      if(res.success){
-        this.isProcess = false;
-        this.message = "Ticket is booked successfully!";
-        this.className = 'alert alert-success';
-      }
-      else{
-        this.isProcess = false;
-        this.message = res.message;
-        this.className = 'alert alert-danger';
-      }
-    }, err =>{
+  booking() {
+    this.isProcess = true;
+    const data = {
+      email:this.ticketBookingForm.value.email,
+      movieTitle:this.movieTitle,
+      showTime:this.ticketBookingForm.value.showTime,
+      noOfTickets:this.ticketBookingForm.value.noOfTickets,
+      totalPrice:this.totalPrice,
+      seats: this.selectedSeats
+    }
+  
+    this.auth.booking(data).subscribe(
+      res => {
+        if (res.success) {
+          this.isProcess = false;
+          this.message = "The Ticket is Booked successfully!";
+          this.className = 'alert alert-success';
+        } else {
+          this.isProcess = false;
+          this.message = res.message;
+          this.className = 'alert alert-danger';
+        }
+      },
+      err => {
         this.isProcess = false;
         this.message = "Server is down!";
         this.className = 'alert alert-danger';
-    })
+      }
+    );
   }
+
 }
 
 

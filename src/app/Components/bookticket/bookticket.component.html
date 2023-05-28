@@ -1,16 +1,16 @@
-<h1 style="background-color: aliceblue; text-align: center;">Ticket Booking</h1>
-
+<h1>Ticket Booking</h1>
 <div class="container1">
-    
-        <div class="container">
-        <div class="column1">
-            <form [formGroup] = "ticketBookingForm">
-                <div [ngClass]="className" role="alert">
-                    {{message}} <a routerLink="/login" style="cursor: pointer;">Login Here</a>
-                </div>
-            <h2 name="title" class="card-title text-white">Movie Name</h2>
+    <div class="container">
+      <div class="column1">
+        <form [formGroup]="ticketBookingForm">
+          <div [ngClass]="className" role="alert">
+            {{ message }} <a routerLink="/login" style="cursor: pointer;"></a>
+          </div>
+            <input formControlName="email" type="email" name="email">
+            <h2 name="title" class="card-title text-white">Movie: {{ movieTitle }}</h2>
+            <img [src]="movieImage" class="card-img-top" alt="images"/>
             <label>Overview:</label> <br>
-            <p name="overview">This movie is registered with us only.</p>
+            <p name="overview">{{ movieOverview }}</p>
             <label>Show Timings:</label><br>
             <div class="time">09:00AM</div>
             <div class="time">12:00PM</div>
@@ -19,14 +19,14 @@
             <br>
             <hr>
             <label>Select a show time: </label>
-            <select name="tickets" id="showTime">
+            <select formControlName="showTime" name="tickets" id="showTime">
                 <option value="09:00AM">09:00AM</option>
                 <option value="12:00AM">12:00AM</option>
                 <option value="04:00AM">04:00AM</option>
                 <option value="10:30AM">10:30AM</option>
             </select><br>
             <label>Number of Tickets:</label>
-            <select name="tickets" id="tickets" (change)="ticketSelectedChange($event)">
+            <select formControlName="noOfTickets" name="tickets" id="tickets" (change)="ticketSelectedChange($event)">
                 <option value="0">Select</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -40,10 +40,13 @@
                 <option value="10">10</option>
             </select><br>
             <label>Ticket Price: </label><span>$20/Ticket</span><br>
-            <label style="color: brown; background-color: green; font-size: 25px;">Total Price: $ <b><span id="total" style="font-size: 25px;"></span></b></label><br> 
             <label>Seat Number: </label><span id="text"></span><br>
-            <label>Name</label>
-            <button (click)="booking()">Book Ticket</button>
+            <label style="color: white; background-color: blue; font-size: 25px; padding: 5px;">Total Price: $ <b><span id="total" style="font-size: 25px;"></span></b></label><br> 
+            <div>
+                <button class="btn btn-danger" routerLink="/dashboard">Cancel</button>
+                <button class="btn btn-success" (click)="booking()">Book Ticket</button>
+            </div>
+            
             </form>
         </div>
         <div class="column2">

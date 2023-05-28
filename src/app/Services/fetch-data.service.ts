@@ -15,9 +15,12 @@ export class FetchDataService {
   getLatestMoviesList() : Observable<any>{
     return this.http.get<any>(this.url+'/movie/latest?api_key='+ environment.api_key);
   }
-  getMovie(id:number){
-    return this.http.get<any>(this.url+`/movie/latest/${id}?api_key=`+environment.api_key);
+  getMovieById(id: String): Observable<MovieInterface> {
+    const url = `${this.url}/movie/${id}?api_key=${environment.api_key};
+    }}`;
+    return this.http.get<MovieInterface>(url);
   }
+
   getNowPlayingMoviesList() : Observable<MovieInterface>{
     return this.http.get<MovieInterface>(this.url+'/movie/now_playing?api_key='+ environment.api_key);
   }

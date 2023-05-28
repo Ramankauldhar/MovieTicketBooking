@@ -1,8 +1,18 @@
 *{
     box-sizing: border-box;
 }
+h1{
+    background-color: aliceblue; text-align: center;
+}
 .container{
+    display:flex;
+    direction: ltr;
     background-color:rgb(157, 176, 239);
+}
+.card-img-top{
+    margin:5px;
+    min-width: 50px;
+    min-height: 50px;
 }
 button{
     padding: 10px;
@@ -10,15 +20,15 @@ button{
 }
 .column1{
     margin: 50px;
+    width: 50%;
+    padding: 5px;
 }
 .column2{
     margin: 50px;
+    width: 50%;
+    padding: 5px;
 }
 
-.container{
-    display:flex;
-    direction: ltr;
-}
 .seat{
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
@@ -106,4 +116,8 @@ select{
 
 div.seat:focus{
     background-color: blue;
+}
+
+button{
+    width:150px;
 }

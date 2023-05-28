@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchDataService } from 'src/app/Services/fetch-data.service';
 import { environment } from 'src/environments/environment';
-import {MovieInterface} from '../../Model/movie-model';
-import { ActivatedRoute } from '@angular/router';
+import {MovieInterface, ResultEntity} from '../../Model/movie-model';
+import { Router } from '@angular/router';
 import { FormGroup , FormBuilder} from '@angular/forms';
 
 @Component({
@@ -17,22 +17,23 @@ export class DashboardComponent implements OnInit {
   NowPlayingMoviesData !: MovieInterface;
   TrendingMoviesData !: MovieInterface;
   UpcomingMoviesData !: MovieInterface;
-  Movie !: MovieInterface;
-
-  constructor(private fetchData : FetchDataService, private route: ActivatedRoute, private formBuilder: FormBuilder){}
+  constructor(private fetchData : FetchDataService, private router: Router, private formBuilder: FormBuilder){}
 
   ngOnInit(): void{
     this.getLatestMoviesList();
     this.getNowPlayingMoviesList();
     this.getTrendingMoviesList();
     this.getUpcomingMoviesList();
+  }
 
-    this.route.params.subscribe(params => {
-      const movieId = params['id'];
+  redirectToTicketBooking(movie: ResultEntity) {
+    const queryParams = {
+      movieImage: movie.backdrop_path || '',
+      movieOverview: movie.overview || '',
+      movieTitle: movie.title || ''
+    };
   
-      // Use the movieId as needed
-      console.log('Movie ID:', movieId);
-    });
+    this.router.navigate(['/bookticket'], { queryParams });
   }
 
   getLatestMoviesList() {
@@ -42,13 +43,7 @@ export class DashboardComponent implements OnInit {
       console.log("Unable to fetch LatestMovies Data.", err);
     })
   }
-  getMovie(id:number){
-    this.fetchData.getMovie(id).subscribe(res =>{
-      this.Movie = this.checkResult(res);
-    }, err => {
-      console.log("Unable to fetch LatestMovies Data.", err);
-    })
-  }
+
   checkResult(res : any): any{
     if(!res.backdrop_path){
       res.backdrop_path = "https://image.tmdb.org/t/p/original"+res.poster_path+'?api_key='+environment.api_key;

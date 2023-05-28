@@ -19,7 +19,7 @@ export interface ResultEntity {
     popularity: number;
     poster_path: string;
     release_date: string;
-    title: string;
+    title: String;
     vote_average: number;
     vote_count: number;
     region:string;
