@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {AuthService} from 'src/app/service/auth.service';
 
@@ -17,8 +17,8 @@ export class LoginComponent implements OnInit {
   
   constructor(private formBuilder: FormBuilder, private auth:AuthService, private router:Router){
     this.loginForm = this.formBuilder.group({
-      'email':['', Validators.required],
-      'pswd':['', Validators.required],
+      'email':new FormControl('', Validators.compose([Validators.required])),
+      'pswd':new FormControl('', Validators.compose([Validators.required, Validators.minLength(8)]) )
     })
   }
   
@@ -29,7 +29,8 @@ export class LoginComponent implements OnInit {
           const data = this.loginForm.value;
           this.auth.login(data).subscribe((res)=>{
             if(res.success){
-              localStorage.setItem('token', res.token)
+              localStorage.setItem('token', res.token);
+              this.auth.setUserEmail(data.email);
               this.router.navigate(['/dashboard'])
             }
             else{

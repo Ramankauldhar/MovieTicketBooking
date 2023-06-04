@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FetchDataService } from 'src/app/Services/fetch-data.service';
 import { environment } from 'src/environments/environment';
-import {MovieInterface, ResultEntity} from '../../Model/movie-model';
+import { MovieInterface, ResultEntity} from '../../Model/movie-model';
 import { Router } from '@angular/router';
 import { FormGroup , FormBuilder} from '@angular/forms';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,29 +12,31 @@ import { FormGroup , FormBuilder} from '@angular/forms';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+ 
   movieForm!:FormGroup
   
   latestMoviesData : any;
   NowPlayingMoviesData !: MovieInterface;
   TrendingMoviesData !: MovieInterface;
   UpcomingMoviesData !: MovieInterface;
-  constructor(private fetchData : FetchDataService, private router: Router, private formBuilder: FormBuilder){}
+  constructor(private fetchData : FetchDataService, private router: Router, private formBuilder: FormBuilder, private auth:AuthService){}
 
   ngOnInit(): void{
     this.getLatestMoviesList();
     this.getNowPlayingMoviesList();
     this.getTrendingMoviesList();
     this.getUpcomingMoviesList();
+   
   }
 
   redirectToTicketBooking(movie: ResultEntity) {
-    const queryParams = {
-      movieImage: movie.backdrop_path || '',
-      movieOverview: movie.overview || '',
-      movieTitle: movie.title || ''
-    };
-  
-    this.router.navigate(['/bookticket'], { queryParams });
+      const queryParams = {
+        movieImage: movie.backdrop_path || '',
+        movieOverview: movie.overview || '',
+        movieTitle: movie.title || ''
+      };
+    
+      this.router.navigate(['/bookticket'], { queryParams });
   }
 
   getLatestMoviesList() {

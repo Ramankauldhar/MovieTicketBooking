@@ -13,6 +13,7 @@ export class BookticketComponent implements OnInit{
 
   ticketBookingForm!:FormGroup
   selectedSeats: number[] = [];
+  email!:string;
 
   movieImage!: string | null;
   movieOverview!: string | null;
@@ -64,6 +65,7 @@ export class BookticketComponent implements OnInit{
       this.movieOverview = params.get('movieOverview') || '';
       this.movieTitle = params.get('movieTitle') || '';
     });
+    this.email = this.auth.getUserEmail();
   }
 
   
@@ -109,7 +111,7 @@ export class BookticketComponent implements OnInit{
   booking() {
     this.isProcess = true;
     const data = {
-      email:this.ticketBookingForm.value.email,
+      email:this.email,
       movieTitle:this.movieTitle,
       showTime:this.ticketBookingForm.value.showTime,
       noOfTickets:this.ticketBookingForm.value.noOfTickets,
@@ -135,7 +137,16 @@ export class BookticketComponent implements OnInit{
         this.className = 'alert alert-danger';
       }
     );
-  }
+
+
+    const allSeats = document.getElementsByClassName('seat');
+    for (let i = 0; i < allSeats.length; i++) {
+      const seat = allSeats[i];
+      if (!seat.classList.contains('Selected')) {
+        seat.setAttribute('disabled', 'disabled');
+      }
+    }
+  } 
 
 }
 

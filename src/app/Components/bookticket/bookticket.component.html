@@ -1,12 +1,13 @@
-<h1>Ticket Booking</h1>
-<div class="container1">
-    <div class="container">
+
+    <h1>Ticket Booking</h1>
+    <div class="container1">
+     <div class="container">
       <div class="column1">
         <form [formGroup]="ticketBookingForm">
           <div [ngClass]="className" role="alert">
             {{ message }} <a routerLink="/login" style="cursor: pointer;"></a>
           </div>
-            <input formControlName="email" type="email" name="email">
+            <p>Hi! {{email}}</p>
             <h2 name="title" class="card-title text-white">Movie: {{ movieTitle }}</h2>
             <img [src]="movieImage" class="card-img-top" alt="images"/>
             <label>Overview:</label> <br>
@@ -155,4 +156,3 @@
             </div>
             </div>
 </div>
-    

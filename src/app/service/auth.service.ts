@@ -6,8 +6,20 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+ 
+  //I want to save the userEmail
+  private userEmail:string='';
 
   constructor(private http:HttpClient) { }
+
+  setUserEmail(email:string){
+    this.userEmail = email;
+  }
+  getUserEmail(){
+    return this.userEmail;
+  }
+
+
   register(data:any):Observable<any>{
     return this.http.post('http://localhost:8022/auth/register', data);
   }
@@ -17,4 +29,8 @@ export class AuthService {
   booking(data:any):Observable<any>{
     return this.http.post('http://localhost:8022/auth/bookticket',data);
   }
+
+
 }
+
+
