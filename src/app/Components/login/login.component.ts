@@ -10,21 +10,26 @@ import {AuthService} from 'src/app/service/auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup
+  submitted = false;
+
   message: String = "";
   isProcess: boolean = false;
   className = 'd-none'; //display none for alert in Html
 
   
   constructor(private formBuilder: FormBuilder, private auth:AuthService, private router:Router){
-    this.loginForm = this.formBuilder.group({
-      'email':new FormControl('', Validators.compose([Validators.required])),
-      'pswd':new FormControl('', Validators.compose([Validators.required, Validators.minLength(8)]) )
-    })
   }
   
-  ngOnInit(): void { }
+  ngOnInit(){ this.loginForm = this.formBuilder.group({
+    email:['', [Validators.required, Validators.email]],
+    pswd:['', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]]
+  })}
   
   login(){
+    this.submitted = true;
+    if(this.loginForm.invalid){
+      return
+    }
           this.isProcess = true;
           const data = this.loginForm.value;
           this.auth.login(data).subscribe((res)=>{

@@ -1,13 +1,12 @@
-
     <h1>Ticket Booking</h1>
     <div class="container1">
      <div class="container">
       <div class="column1">
-        <form [formGroup]="ticketBookingForm">
+        <form [formGroup]="ticketBookingForm" (ngSubmit)="booking()">
           <div [ngClass]="className" role="alert">
             {{ message }} <a routerLink="/login" style="cursor: pointer;"></a>
           </div>
-            <p>Hi! {{email}}</p>
+            <p>{{email}}</p>
             <h2 name="title" class="card-title text-white">Movie: {{ movieTitle }}</h2>
             <img [src]="movieImage" class="card-img-top" alt="images"/>
             <label>Overview:</label> <br>
@@ -20,14 +19,19 @@
             <br>
             <hr>
             <label>Select a show time: </label>
-            <select formControlName="showTime" name="tickets" id="showTime">
+            <select formControlName="showTime" name="tickets" id="showTime" [ngClass]="{'is-invalid': submitted && ticketBookingForm.controls['showTime'].errors}">
                 <option value="09:00AM">09:00AM</option>
                 <option value="12:00AM">12:00AM</option>
                 <option value="04:00AM">04:00AM</option>
                 <option value="10:30AM">10:30AM</option>
             </select><br>
+            <div *ngIf="submitted && ticketBookingForm.controls['showTime'].errors" class="text-danger">
+                <div *ngIf="submitted && ticketBookingForm.controls['showTime'].errors['required']">
+                    Select a show timing
+                </div>
+             </div>
             <label>Number of Tickets:</label>
-            <select formControlName="noOfTickets" name="tickets" id="tickets" (change)="ticketSelectedChange($event)">
+            <select formControlName="noOfTickets" name="tickets" id="tickets" (change)="ticketSelectedChange($event)" [ngClass]="{'is-invalid': submitted && ticketBookingForm.controls['noOfTickets'].errors}">
                 <option value="0">Select</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -40,12 +44,18 @@
                 <option value="9">9</option>
                 <option value="10">10</option>
             </select><br>
+            <div *ngIf="submitted && ticketBookingForm.controls['noOfTickets'].errors" class="text-danger">
+                <div *ngIf="submitted && ticketBookingForm.controls['noOfTickets'].errors['required']">
+                    Choose no. of tickets
+                </div>
+             </div>
             <label>Ticket Price: </label><span>$20/Ticket</span><br>
             <label>Seat Number: </label><span id="text"></span><br>
-            <label style="color: white; background-color: blue; font-size: 25px; padding: 5px;">Total Price: $ <b><span id="total" style="font-size: 25px;"></span></b></label><br> 
+           
+            <label style="color: white; background-color: blue; font-size: 25px; padding: 5px;">Total Ticket Price: $ <b><span id="total" style="font-size: 25px;"></span></b></label><br> 
             <div>
                 <button class="btn btn-danger" routerLink="/dashboard">Cancel</button>
-                <button class="btn btn-success" (click)="booking()">Book Ticket</button>
+                <button class="btn btn-success">Proceed To Pay</button>
             </div>
             
             </form>

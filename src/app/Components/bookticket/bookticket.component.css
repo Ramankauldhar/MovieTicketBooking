@@ -11,7 +11,8 @@ h1{
 }
 .card-img-top{
     margin:5px;
-    min-width: 50px;
+    width:100%;
+    min-width: 50px;;
     min-height: 50px;
 }
 button{
@@ -120,4 +121,32 @@ div.seat:focus{
 
 button{
     width:150px;
+}
+
+@media screen and (max-width:1000px) {
+    .container{
+        display: block;
+    }
+    .column1{
+        width: 100%;
+    }
+    .column2{
+        width: 100%;
+    }
+    .card-img-top{
+        margin:5px;
+        min-width: 20px;;
+        min-height: 20px;
+    }
+}
+@media screen and (max-width:400px) {
+    .container{
+        display: block;
+    }
+    .column1{
+        width: 100%;
+    }
+    .column2{
+        width: 100%;
+    }
 }

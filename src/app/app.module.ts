@@ -12,6 +12,7 @@ import { NavigationComponent } from './Components/navigation/navigation.componen
 import { FooterComponent } from './Components/footer/footer.component';
 import { ProfileComponent } from './Components/profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CheckoutComponent } from './Components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BookticketComponent,
     NavigationComponent,
     FooterComponent,
-    ProfileComponent
+    ProfileComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,

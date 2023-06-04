@@ -19,7 +19,6 @@ export class AuthService {
     return this.userEmail;
   }
 
-
   register(data:any):Observable<any>{
     return this.http.post('http://localhost:8022/auth/register', data);
   }

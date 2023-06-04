@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AuthService } from 'src/app/service/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';';pl,.p'
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-bookticket',
@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';';pl,.p'
 export class BookticketComponent implements OnInit{
 
   ticketBookingForm!:FormGroup
+  submitted = false;
   selectedSeats: number[] = [];
   email!:string;
 
@@ -41,9 +42,10 @@ export class BookticketComponent implements OnInit{
     {
     this.ticketBookingForm = this.formBuilder.group(
       {
-        'email':['', Validators.required],
-        'showTime':['', Validators.required],
-        'noOfTickets':['', Validators.required],
+        email:['', Validators.required],
+        showTime:['', Validators.required],
+        noOfTickets:['', Validators.required],
+        seats:['', Validators.required]
       }
     )
   }
@@ -109,15 +111,19 @@ export class BookticketComponent implements OnInit{
   }
 
   booking() {
+    this.submitted = true;
+    if(this.ticketBookingForm.invalid){
+      return
+    }
     this.isProcess = true;
     const data = {
-      email:this.email,
-      movieTitle:this.movieTitle,
-      showTime:this.ticketBookingForm.value.showTime,
-      noOfTickets:this.ticketBookingForm.value.noOfTickets,
-      totalPrice:this.totalPrice,
+      email: this.email,
+      movieTitle: this.movieTitle,
+      showTime: this.ticketBookingForm.value.showTime,
+      noOfTickets: this.ticketBookingForm.value.noOfTickets,
+      totalPrice: this.totalPrice,
       seats: this.selectedSeats
-    }
+    };
   
     this.auth.booking(data).subscribe(
       res => {
@@ -125,6 +131,16 @@ export class BookticketComponent implements OnInit{
           this.isProcess = false;
           this.message = "The Ticket is Booked successfully!";
           this.className = 'alert alert-success';
+  
+          const queryParams = {
+            email: this.email,
+            movieTitle: this.movieTitle,
+            showTime: this.ticketBookingForm.value.showTime,
+            noOfTickets: this.ticketBookingForm.value.noOfTickets,
+            totalPrice: this.totalPrice,
+            seats: this.selectedSeats
+          };
+          this.router.navigate(['/checkout'], { queryParams: { data: JSON.stringify(queryParams) } });
         } else {
           this.isProcess = false;
           this.message = res.message;
@@ -137,8 +153,7 @@ export class BookticketComponent implements OnInit{
         this.className = 'alert alert-danger';
       }
     );
-
-
+  
     const allSeats = document.getElementsByClassName('seat');
     for (let i = 0; i < allSeats.length; i++) {
       const seat = allSeats[i];
@@ -146,7 +161,7 @@ export class BookticketComponent implements OnInit{
         seat.setAttribute('disabled', 'disabled');
       }
     }
-  } 
+  }
 
 }
 

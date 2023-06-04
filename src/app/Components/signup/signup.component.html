@@ -8,20 +8,44 @@
                     {{message}} <a routerLink="/login" style="cursor: pointer;">Login Here</a>
                 </div>
 
-                <form [formGroup] = "registerForm">
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Full Name</label>
-                        <input type="text" formControlName="fullName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <form [formGroup] = "registerForm" (ngSubmit)="register()">
+                    <div class="mb-3 form-group">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" formControlName="fullName" [ngClass]="{'is-invalid': submitted && registerForm.controls['fullName'].errors}" class="form-control" id="fullName">
+                        <div *ngIf="submitted && registerForm.controls['fullName'].errors" class="text-danger">
+                            <div *ngIf="submitted && registerForm.controls['fullName'].errors['required']">
+                                Full Name is required
+                            </div>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" formControlName="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <div class="mb-3 form-group">
+                        <label for="email" class="form-label">Email address</label>
+                        <input type="email" formControlName="email" [ngClass]="{'is-invalid': submitted && registerForm.controls['email'].errors}" class="form-control" id="email" aria-describedby="emailHelp">
+                        <div *ngIf="submitted && registerForm.controls['email'].errors" class="text-danger">
+                            <div *ngIf="submitted && registerForm.controls['email'].errors['required']">
+                                Email is required
+                            </div>
+                            <div *ngIf="submitted && registerForm.controls['email'].errors['email']">
+                                Please writer a valid email
+                            </div>
+                        </div> 
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" formControlName="pswd" class="form-control" id="exampleInputPassword1">
+                    <div class="mb-3 form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" formControlName="pswd" [ngClass]="{'is-invalid': submitted && registerForm.controls['pswd'].errors}" class="form-control" id="pswd">
+                        <div *ngIf="submitted && registerForm.controls['pswd'].errors" class="text-danger">
+                            <div *ngIf="submitted && registerForm.controls['pswd'].errors['required']">
+                                Password is required
+                            </div>
+                            <div *ngIf="submitted && registerForm.controls['pswd'].errors['minlength']">
+                                Password Should be atleast 4 Charactors
+                            </div>
+                            <div *ngIf="submitted && registerForm.controls['pswd'].errors['maxlength']">
+                                Password Should not be more than 8 Charactors
+                            </div>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-success" style="margin-left: 40%;" (click)="register()">Register</button>
+                    <button type="submit" class="btn btn-success" style="margin-left: 40%;">Register</button>
                     <p style="text-align: center;">Already have an account? <a routerLink="/login">Login here</a></p>
                 </form>
             </div>

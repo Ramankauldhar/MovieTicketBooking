@@ -7,20 +7,33 @@
                 <div [ngClass]="className" role="alert">
                     {{message}}
                 </div>
-                    <form [formGroup]="loginForm">
-                        <div class="mb-3">
+                    <form [formGroup]="loginForm" (ngSubmit)="login()">
+                        <div class="mb-3 form-group">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" formControlName="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            <span class="danger">Enter your Email</span>
-                            <span class="danger">Enter a valid Email</span>
+                            <input type="email" formControlName="email" [ngClass]="{'is-invalid': submitted && loginForm.controls['email'].errors}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <div *ngIf="submitted && loginForm.controls['email'].errors" class="text-danger">
+                                <div *ngIf="submitted && loginForm.controls['email'].errors['required']">
+                                    Email is required
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3 form-group">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" formControlName="pswd" class="form-control" id="exampleInputPassword1">
+                            <input type="password" formControlName="pswd" [ngClass]="{'is-invalid': submitted && loginForm.controls['pswd'].errors}" class="form-control" id="exampleInputPassword1">
+                            <div *ngIf="submitted && loginForm.controls['pswd'].errors" class="text-danger">
+                                <div *ngIf="submitted && loginForm.controls['pswd'].errors['required']">
+                                    Password is required
+                                </div>
+                                <div *ngIf="submitted && loginForm.controls['pswd'].errors['minlength']">
+                                    Password Should be atleast 4 Charactors
+                                </div>
+                                <div *ngIf="submitted && loginForm.controls['pswd'].errors['maxlength']">
+                                    Password Should not be more than 8 Charactors
+                                </div>
+                            </div>
                         </div>
-                        <a routerLink="/Login" style="cursor: pointer;">Forget Password?</a> <br/>
                     
-                        <button type="submit" style="margin-left: 40%; margin-bottom: 10px;" class="btn btn-success" (click)="login()">Login</button>
+                        <button type="submit" style="margin-left: 40%; margin-bottom: 10px;" class="btn btn-success">Login</button>
                         <p style="text-align: center;">Don't you have an account? <a routerLink="/signup">Register here</a></p>
                         
                     </form>

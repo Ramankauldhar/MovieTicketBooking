@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="detailsContainer">
+        <form [formGroup] = "checkOutForm" (ngSubmit)="finalCheckOut()">
+            <div class="details">
+                <p>Your Email: {{ email }}</p>
+                <p> Selected Movie: {{movieTitle}}</p>
+            </div>
+            <div class="payment">
+                <div class="details2">
+                    <p>Payment Details</p>
+                    <div class="form-group">
+                        <label>Name on card:</label>
+                        <input class="form-control" type="text" placeholder="Enter name" formControlName="name" [ngClass]="{'is-invalid': submitted && checkOutForm.controls['name'].errors}" required>
+                        <div *ngIf="submitted && checkOutForm.controls['name'].errors" class="text-danger">
+                           <div *ngIf="submitted && checkOutForm.controls['name'].errors['required']">
+                               Name is required
+                           </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Card Number:</label>
+                        <input class="form-control" type="text" placeholder="Enter card number" max="16" formControlName="card" [ngClass]="{'is-invalid': submitted && checkOutForm.controls['card'].errors}" 
+                        pattern="[0-9]{16}" maxlength="16" (input)="sanitizeCardNumber($event)" required>
+                        <div *ngIf="submitted && checkOutForm.controls['card'].errors" class="text-danger">
+                             <div *ngIf="submitted && checkOutForm.controls['card'].errors['required']">
+                                Card Number is required
+                             </div>
+                             <div *ngIf="submitted && checkOutForm.controls['card'].errors['pattern']">
+                                Card Number should be 16 digits
+                              </div>
+                        </div>
+                    </div>    
+                    
+                    <div class="form-group">
+                        <label>CVV:(3 Digits)</label>
+                        <input class="form-control" type="text" formControlName="cvv" [ngClass]="{'is-invalid': submitted && checkOutForm.controls['cvv'].errors}" 
+                        pattern="[0-9]{3}" maxlength="3" (input)="sanitizeCVV($event)"required>
+                        <div *ngIf="submitted && checkOutForm.controls['cvv'].errors" class="text-danger">
+                             <div *ngIf="submitted && checkOutForm.controls['cvv'].errors['required']">
+                                CVV is required
+                             </div>
+                             <div *ngIf="submitted && checkOutForm.controls['cvv'].errors['pattern']">
+                                CVV should be 3 digits only
+                              </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Expiry Date: (MMYY)</label>
+                        <input class="form-control" type="text" placeholder="MMYY" formControlName="exDate" [ngClass]="{'is-invalid': submitted && checkOutForm.controls['exDate'].errors}" 
+                        pattern="[0-9]{4}" maxlength="4" (input)="sanitizeExpiryDate($event)" required>
+                        <div *ngIf="submitted && checkOutForm.controls['exDate'].errors" class="text-danger">
+                          <div *ngIf="submitted && checkOutForm.controls['exDate'].errors['required']">
+                            Expiry Date is required
+                          </div>
+                          <div *ngIf="submitted && checkOutForm.controls['exDate'].errors['pattern']">
+                            Expiry Date should be 4 digits only
+                          </div>
+                        </div>
+                      </div>
+    
+                </div>
+               
+                <div class="details3">
+                <p>Payment Summary</p>
+                <hr>
+                <span ngModel="totalPrice"><b>Sub Total:</b> ${{totalPrice}}</span><br>
+                <span><b>GST:</b> ${{2.03}}</span><br>
+                <hr>
+                <span>Total: ${{ totalPrice ? totalPrice + 2.03 : 0 }}</span><br>
+                <div class="buttons">
+                    <button class="btn btn-success">Pay Now</button>
+                </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>        
