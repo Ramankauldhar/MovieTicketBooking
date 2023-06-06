@@ -1,0 +1,12 @@
+@media (max-width: 767px) {
+    .navbar-collapse {
+      background-color: rgb(244, 70, 47);
+    }
+    .navbar-nav {
+      margin-top: 10px;
+    }
+    .navbar-nav .nav-link {
+      color: #fff;
+      margin-bottom: 10px;
+    }
+  }

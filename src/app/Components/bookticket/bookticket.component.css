@@ -1,16 +1,18 @@
 *{
-    box-sizing: border-box;
+    overflow: hidden;
 }
 h1{
     background-color: aliceblue; text-align: center;
 }
 .container{
     display:flex;
-    direction: ltr;
     background-color:rgb(157, 176, 239);
 }
 .card-img-top{
-    margin:5px;
+    margin-top:5px;
+    padding:2px;
+    margin-left: auto;
+    margin-right: auto;
     width:100%;
     min-width: 50px;;
     min-height: 50px;
@@ -36,7 +38,7 @@ button{
     height: 40px;
     width: 40px;
     background-color: grey;
-    margin: 2px;
+    margin-left: 10px;
 }
 .seat1{
     border-top-left-radius: 40px;
@@ -122,15 +124,34 @@ div.seat:focus{
 button{
     width:150px;
 }
+@media screen and (max-width:1400px) {
+    .seat{
+        border-top-left-radius: 40px;
+        border-top-right-radius: 40px;
+        height: 30px;
+        width: 30px;
+        background-color: grey;
+        margin-left: 2px;
+    }
+    .seat:nth-of-type(2){
+        margin-right: 10px;
+    }
+    .seat:nth-last-of-type(2){
+        margin-left: 10px;
+    }
+  
+}
 
 @media screen and (max-width:1000px) {
     .container{
         display: block;
     }
     .column1{
+        margin: 5px;
         width: 100%;
     }
     .column2{
+        margin: 5px;
         width: 100%;
     }
     .card-img-top{
@@ -138,15 +159,44 @@ button{
         min-width: 20px;;
         min-height: 20px;
     }
+    .seat{
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+        height: 30px;
+        width: 30px;
+        background-color: grey;
+        margin: 2px;
+    }
+
 }
 @media screen and (max-width:400px) {
     .container{
         display: block;
     }
     .column1{
+        margin: 5px;
         width: 100%;
     }
     .column2{
+        margin: 5px;
         width: 100%;
+    }
+    .seat{
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        height: 20px;
+        width: 20px;
+        background-color: grey;
+        margin: 2px;
+    }
+}
+@media screen and (max-width:300px) {
+    .seat{
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        height: 20px;
+        width: 2px;
+        background-color: grey;
+        margin: 1px;
     }
 }
