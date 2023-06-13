@@ -29,14 +29,14 @@ export class AuthService {
   }
 
   register(data:any):Observable<any>{
-    return this.http.post('http://localhost:8022/auth/register', data);
+    return this.http.post('https://movieticketbookingbackend.onrender.com/auth/register', data);
   }
   login(data:any):Observable<any>{
     this.isAuthenticated = true;
-    return this.http.post('http://localhost:8022/auth/login',data);
+    return this.http.post('https://movieticketbookingbackend.onrender.com/auth/login',data);
   }
   booking(data:any):Observable<any> {
-    return this.http.post('http://localhost:8022/auth/bookticket',data);
+    return this.http.post('https://movieticketbookingbackend.onrender.com/auth/bookticket',data);
   }
 
   logout() {

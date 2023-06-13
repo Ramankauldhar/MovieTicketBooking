@@ -49,8 +49,17 @@ button{
     background-color: grey;
     margin: 4px;
 }
-.row.row3{
-    margin-top:20px;
+.seatsContainer{
+    padding:15px;
+    align-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
+
+.row {
+    margin-top:15px;
+    justify-content: space-between;
 }
 
 .seat.Selected{
@@ -124,12 +133,16 @@ div.seat:focus{
 
 
 @media screen and (max-width:1400px) {
+    .seatsContainer{
+        margin-left: 15px;
+        margin-right: 5px;
+        justify-content: center;
+    }
     .seat{
         border-top-left-radius: 40px;
         border-top-right-radius: 40px;
         height: 30px;
         width: 30px;
-        background-color: grey;
         margin-left: 2px;
     }
     .seat:nth-of-type(2){
@@ -141,7 +154,7 @@ div.seat:focus{
   
 }
 
-@media screen and (max-width:1000px) {
+@media screen and (max-width:1200px) {
     .container{
         display: block;
     }
@@ -158,15 +171,12 @@ div.seat:focus{
         min-width: 20px;;
         min-height: 20px;
     }
-    .seat{
-        border-top-left-radius: 30px;
-        border-top-right-radius: 30px;
-        height: 30px;
-        width: 30px;
-        background-color: grey;
-        margin: 2px;
-    }
 
+}
+@media screen and (max-width:850px) {
+    .seatsContainer{
+        justify-content:space-between;
+    }
 }
 @media screen and (max-width:400px) {
     .container{
@@ -185,7 +195,6 @@ div.seat:focus{
         border-top-right-radius: 20px;
         height: 20px;
         width: 20px;
-        background-color: grey;
         margin: 2px;
     }
 }
@@ -193,9 +202,8 @@ div.seat:focus{
     .seat{
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
-        height: 20px;
-        width: 2px;
-        background-color: grey;
+        height: 15px;
+        width: 5px;
         margin: 1px;
     }
 }
