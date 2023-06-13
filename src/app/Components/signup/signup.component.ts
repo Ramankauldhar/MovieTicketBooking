@@ -48,7 +48,7 @@ export class SignupComponent implements OnInit  {
         this.message = res.message;
         this.className = 'alert alert-danger';
       }
-      //this.registerForm.reset();
+      this.registerForm.reset();
     }, err =>{
       //server side error handling
         this.isProcess = false;

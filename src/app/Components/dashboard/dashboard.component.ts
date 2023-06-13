@@ -28,15 +28,21 @@ export class DashboardComponent implements OnInit {
     this.getUpcomingMoviesList();
    
   }
+  isLoggedIn(): boolean {
+    return this.auth.isLoggedIn(); 
+  }
 
   redirectToTicketBooking(movie: ResultEntity) {
+    if (this.isLoggedIn()) {
       const queryParams = {
         movieImage: movie.backdrop_path || '',
         movieOverview: movie.overview || '',
         movieTitle: movie.title || ''
       };
-    
       this.router.navigate(['/bookticket'], { queryParams });
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
   getLatestMoviesList() {

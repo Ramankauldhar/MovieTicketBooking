@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AuthService } from 'src/app/service/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { BookTicketService } from 'src/app/service/book-ticket.service';
 
 @Component({
   selector: 'app-bookticket',
@@ -15,6 +15,10 @@ export class BookticketComponent implements OnInit{
   submitted = false;
   selectedSeats: number[] = [];
   email!:string;
+  showTime!:string;
+  noOfTickets!:number;
+  totalPrice2!:number;
+ 
 
   movieImage!: string | null;
   movieOverview!: string | null;
@@ -38,16 +42,8 @@ export class BookticketComponent implements OnInit{
      private auth:AuthService, 
      private route:ActivatedRoute, 
      private router:Router,
-     private http:HttpClient)
+     private bookingService: BookTicketService)
     {
-    this.ticketBookingForm = this.formBuilder.group(
-      {
-        email:['', Validators.required],
-        showTime:['', Validators.required],
-        noOfTickets:['', Validators.required],
-        seats:['', Validators.required]
-      }
-    )
   }
 
   ngOnInit(): void {
@@ -62,6 +58,15 @@ export class BookticketComponent implements OnInit{
     this.updateSelectedCount();
     this.seatsContainer.addEventListener("click", this.handleSeatClick);
 
+    this.ticketBookingForm = this.formBuilder.group(
+      {
+        email:['', Validators.required],
+        showTime:['', Validators.required],
+        noOfTickets:['', Validators.required],
+        seats:['', Validators.required]
+      }
+    )
+
     this.route.queryParamMap.subscribe((params) => {
       this.movieImage = params.get('movieImage') || '';
       this.movieOverview = params.get('movieOverview') || '';
@@ -70,6 +75,9 @@ export class BookticketComponent implements OnInit{
     this.email = this.auth.getUserEmail();
   }
 
+  isLoggedIn(): boolean {
+    return this.auth.isLoggedIn(); 
+  }
   
   updateSelectedCount(): void{
     const seatSelected = document.querySelectorAll('.row .seat.Selected');
@@ -110,11 +118,8 @@ export class BookticketComponent implements OnInit{
     this.updateSelectedCount();
   }
 
-  booking() {
-    this.submitted = true;
-    if(this.ticketBookingForm.invalid){
-      return
-    }
+  bookingFunction() {
+
     this.isProcess = true;
     const data = {
       email: this.email,
@@ -126,43 +131,29 @@ export class BookticketComponent implements OnInit{
     };
   
     this.auth.booking(data).subscribe(
-      res => {
+      (res) => {
         if (res.success) {
+          this.bookingService.setBookingData(data);
+          // Assuming the response contains a success flag or message
+          console.log('Booking successful:', res);
+          // Clear the form and reset variables
+          this.ticketBookingForm.reset();
+          this.selectedSeats = [];
           this.isProcess = false;
-          this.message = "The Ticket is Booked successfully!";
-          this.className = 'alert alert-success';
-  
-          const queryParams = {
-            email: this.email,
-            movieTitle: this.movieTitle,
-            showTime: this.ticketBookingForm.value.showTime,
-            noOfTickets: this.ticketBookingForm.value.noOfTickets,
-            totalPrice: this.totalPrice,
-            seats: this.selectedSeats
-          };
-          this.router.navigate(['/checkout'], { queryParams: { data: JSON.stringify(queryParams) } });
+          // Redirect to the checkout component
+          this.router.navigate(['/checkout']);
         } else {
+          console.log('Booking failed:', res);
           this.isProcess = false;
           this.message = res.message;
           this.className = 'alert alert-danger';
         }
       },
-      err => {
+      (error) => {
+        console.log('Error occurred:', error);
         this.isProcess = false;
-        this.message = "Server is down!";
-        this.className = 'alert alert-danger';
+        // Handle error case, display appropriate message to the user
       }
     );
-  
-    const allSeats = document.getElementsByClassName('seat');
-    for (let i = 0; i < allSeats.length; i++) {
-      const seat = allSeats[i];
-      if (!seat.classList.contains('Selected')) {
-        seat.setAttribute('disabled', 'disabled');
-      }
     }
-  }
-
 }
-
-

@@ -10,9 +10,9 @@ import { SignupComponent } from './Components/signup/signup.component';
 import { BookticketComponent } from './Components/bookticket/bookticket.component';
 import { NavigationComponent } from './Components/navigation/navigation.component';
 import { FooterComponent } from './Components/footer/footer.component';
-import { ProfileComponent } from './Components/profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CheckoutComponent } from './Components/checkout/checkout.component';
+import { BookingConfirmComponent } from './Components/booking-confirm/booking-confirm.component';
 
 @NgModule({
   declarations: [
@@ -23,8 +23,9 @@ import { CheckoutComponent } from './Components/checkout/checkout.component';
     BookticketComponent,
     NavigationComponent,
     FooterComponent,
-    ProfileComponent,
-    CheckoutComponent
+
+    CheckoutComponent,
+    BookingConfirmComponent
   ],
   imports: [
     BrowserModule,

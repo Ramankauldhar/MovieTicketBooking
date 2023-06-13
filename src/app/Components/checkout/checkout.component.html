@@ -2,8 +2,8 @@
     <div class="detailsContainer">
         <form [formGroup] = "checkOutForm" (ngSubmit)="finalCheckOut()">
             <div class="details">
-                <p>Your Email: {{ email }}</p>
-                <p> Selected Movie: {{movieTitle}}</p>
+                <p>Your Email: {{ bookingData.email }}</p>
+                <p> Selected Movie: {{bookingData.movieTitle}}</p>
             </div>
             <div class="payment">
                 <div class="details2">
@@ -65,10 +65,10 @@
                 <div class="details3">
                 <p>Payment Summary</p>
                 <hr>
-                <span ngModel="totalPrice"><b>Sub Total:</b> ${{totalPrice}}</span><br>
+                <span ngModel="totalPrice"><b>Sub Total:</b> ${{bookingData.totalPrice}}</span><br>
                 <span><b>GST:</b> ${{2.03}}</span><br>
                 <hr>
-                <span>Total: ${{ totalPrice ? totalPrice + 2.03 : 0 }}</span><br>
+                <span>Total: ${{ bookingData.totalPrice ? bookingData.totalPrice + 2.03 : 0 }}</span><br>
                 <div class="buttons">
                     <button class="btn btn-success">Pay Now</button>
                 </div>

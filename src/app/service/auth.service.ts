@@ -6,11 +6,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+
+  private isAuthenticated: boolean = false;
  
   //I want to save the userEmail
   private userEmail:string='';
 
   constructor(private http:HttpClient) { }
+  
 
   setUserEmail(email:string){
     this.userEmail = email;
@@ -19,16 +22,26 @@ export class AuthService {
     return this.userEmail;
   }
 
+
+  // Function to check if the user is logged in
+  isLoggedIn(): boolean {
+    return this.isAuthenticated;
+  }
+
   register(data:any):Observable<any>{
     return this.http.post('http://localhost:8022/auth/register', data);
   }
   login(data:any):Observable<any>{
+    this.isAuthenticated = true;
     return this.http.post('http://localhost:8022/auth/login',data);
   }
-  booking(data:any):Observable<any>{
+  booking(data:any):Observable<any> {
     return this.http.post('http://localhost:8022/auth/bookticket',data);
   }
 
+  logout() {
+    this.isAuthenticated = false;
+  }
 
 }
 

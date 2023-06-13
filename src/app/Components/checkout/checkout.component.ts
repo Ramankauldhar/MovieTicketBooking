@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { BookTicketService } from 'src/app/service/book-ticket.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-checkout',
@@ -8,10 +10,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit{
-
-
   checkOutForm!: FormGroup;
   submitted = false;
+  bookingData: any;
 
   email!:string|null;
   movieTitle!:string|null;
@@ -20,10 +21,13 @@ export class CheckoutComponent implements OnInit{
   totalPrice!:number|null;
   seats!:number[]|null;
 
-  constructor(private route:ActivatedRoute, private formBuilder: FormBuilder)
+  constructor(private formBuilder: FormBuilder, private bookingService:BookTicketService, private router:Router, private auth:AuthService)
     {}
 
     ngOnInit(){
+      //getting the booking data from bookTicket Compoenent
+      this.bookingData = this.bookingService.getBookingData();
+
       this.checkOutForm = this.formBuilder.group(
         {
           name:['', Validators.required],
@@ -32,20 +36,12 @@ export class CheckoutComponent implements OnInit{
           exDate:['', Validators.required],
         }
       )
+      }
 
-      this.route.queryParamMap.subscribe((params) => {
-        const data = JSON.parse(params.get('data') || '{}');
-        this.email = data.email;
-        this.movieTitle = data.movieTitle;
-        this.showTime = data.showTime;
-        this.noOfTickets = data.noOfTickets;
-        this.totalPrice = data.totalPrice;
-        this.seats = data.seats;
-    
-        console.log(data);
-      });
+
+    isLoggedIn(): boolean {
+        return this.auth.isLoggedIn(); 
     }
-
     sanitizeCardNumber(event: Event) {
       const inputElement = event.target as HTMLInputElement;
       const sanitizedValue = inputElement.value.replace(/\D/g, '');
@@ -67,15 +63,6 @@ export class CheckoutComponent implements OnInit{
     if(this.checkOutForm.invalid){
       return
     }
-    const message = `
-      Booking confirmed!
-      Email: ${this.email}
-      Movie Title: ${this.movieTitle}
-      Show Time: ${this.showTime}
-      Number of Tickets: ${this.noOfTickets}
-      Total Price: ${this.totalPrice ? this.totalPrice + 2.03 : 0}
-      Seats: ${this.seats}
-    `;
-    alert(message);
+    this.router.navigate(['/confirm']);
   }
 }

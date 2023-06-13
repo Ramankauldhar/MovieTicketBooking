@@ -4,8 +4,8 @@ import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { LoginComponent} from './Components/login/login.component';
 import { SignupComponent } from './Components/signup/signup.component';
 import { BookticketComponent } from './Components/bookticket/bookticket.component';
-import { ProfileComponent } from './Components/profile/profile.component';
 import { CheckoutComponent } from './Components/checkout/checkout.component';
+import { BookingConfirmComponent } from './Components/booking-confirm/booking-confirm.component';
 
 const routes: Routes = [
   {path:'', redirectTo:'dashboard', pathMatch:'full'},
@@ -14,8 +14,8 @@ const routes: Routes = [
   {path:'signup', component:SignupComponent},
   {path:'bookticket', component:BookticketComponent },
   {path: 'bookticket/:id', component:BookticketComponent},
-  {path:'profile', component:ProfileComponent},
-  {path:'checkout', component:CheckoutComponent}
+  {path:'checkout', component:CheckoutComponent},
+  {path:'confirm', component:BookingConfirmComponent}
 ];
 
 @NgModule({

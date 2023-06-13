@@ -1,0 +1,18 @@
+.container{
+    text-align: center;
+    margin:50px;
+    border: 1px solid red;
+    border-radius: 10px;
+    background-color: grey;
+}
+h3{
+    margin:50px;
+}
+p{
+    font-size: 20px;
+    font-weight: 500;
+}
+.data{
+    background-color: lightgray;
+    padding:20px;
+}

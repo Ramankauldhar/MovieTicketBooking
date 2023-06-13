@@ -2,7 +2,7 @@
     <div class="container1">
      <div class="container">
       <div class="column1">
-        <form [formGroup]="ticketBookingForm" (ngSubmit)="booking()">
+        <form [formGroup]="ticketBookingForm" (ngSubmit)="bookingFunction()">
           <div [ngClass]="className" role="alert">
             {{ message }} <a routerLink="/login" style="cursor: pointer;"></a>
           </div>
@@ -30,9 +30,7 @@
                     Select a show timing
                 </div>
              </div>
-            <label>Number of Tickets:</label>
-            <select formControlName="noOfTickets" name="tickets" id="tickets" (change)="ticketSelectedChange($event)" [ngClass]="{'is-invalid': submitted && ticketBookingForm.controls['noOfTickets'].errors}">
-                <option value="0">Select</option>
+            <label>Number of Tickets:</label> <select formControlName="noOfTickets" name="tickets" id="tickets" (change)="ticketSelectedChange($event)" [ngClass]="{'is-invalid': submitted && ticketBookingForm.controls['noOfTickets'].errors}">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -53,10 +51,10 @@
             <label>Seat Number: </label><span id="text"></span><br>
            
             <label style="color: white; background-color: blue; font-size: 25px; padding: 5px;">Total Ticket Price: $ <b><span id="total" style="font-size: 25px;"></span></b></label><br> 
-            <div>
-                <button class="btn btn-danger" routerLink="/dashboard">Cancel</button>
-                <button class="btn btn-success">Proceed To Pay</button>
-            </div>
+            
+        
+            <button class="btn btn-success">Proceed To Pay</button>
+            
             
             </form>
         </div>
