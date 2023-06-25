@@ -17,9 +17,11 @@ export class AuthService {
 
   setUserEmail(email:string){
     this.userEmail = email;
+    localStorage.setItem('email', email)
   }
-  getUserEmail(){
-    return this.userEmail;
+  getUserEmail(): string {
+    const email = localStorage.getItem('email');
+    return email !== null ? email : '';
   }
 
 

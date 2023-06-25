@@ -39,9 +39,10 @@ export class CheckoutComponent implements OnInit{
       }
 
 
-    isLoggedIn(): boolean {
-        return this.auth.isLoggedIn(); 
-    }
+      isLoggedIn(): boolean {
+        const loginToken = localStorage.getItem('token');
+        return loginToken !== null;
+      }
     sanitizeCardNumber(event: Event) {
       const inputElement = event.target as HTMLInputElement;
       const sanitizedValue = inputElement.value.replace(/\D/g, '');

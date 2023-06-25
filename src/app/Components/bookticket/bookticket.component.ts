@@ -14,8 +14,8 @@ export class BookticketComponent implements OnInit{
   ticketBookingForm!:FormGroup
   submitted = false;
   selectedSeats: number[] = [];
-  email!:string;
   showTime!:string;
+  email!:String;
   noOfTickets!:number;
   totalPrice2!:number;
  
@@ -76,7 +76,8 @@ export class BookticketComponent implements OnInit{
   }
 
   isLoggedIn(): boolean {
-    return this.auth.isLoggedIn(); 
+    const loginToken = localStorage.getItem('token');
+    return loginToken !== null;
   }
   
   updateSelectedCount(): void{
@@ -122,7 +123,7 @@ export class BookticketComponent implements OnInit{
 
     this.isProcess = true;
     const data = {
-      email: this.email,
+      email:this.email,
       movieTitle: this.movieTitle,
       showTime: this.ticketBookingForm.value.showTime,
       noOfTickets: this.ticketBookingForm.value.noOfTickets,
