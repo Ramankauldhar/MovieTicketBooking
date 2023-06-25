@@ -29,7 +29,8 @@ export class DashboardComponent implements OnInit {
    
   }
   isLoggedIn(): boolean {
-    return this.auth.isLoggedIn(); 
+    const loginToken = localStorage.getItem('token');
+    return loginToken !== null;
   }
 
   redirectToTicketBooking(movie: ResultEntity) {
