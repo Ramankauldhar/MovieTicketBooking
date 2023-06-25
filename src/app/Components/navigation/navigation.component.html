@@ -12,7 +12,7 @@
             <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item p2">
-            <a class="nav-link text-white" href="/login">LogIn</a>
+            <a class="nav-link text-white" routerLink="/login">LogIn</a>
           </li>
           <li class="nav-item p2" *ngIf="isLoggedIn()">
             <a class="nav-link text-white" (click)="logout()">LogOut</a>

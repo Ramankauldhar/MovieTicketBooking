@@ -21,9 +21,9 @@
             <label>Select a show time: </label>
             <select formControlName="showTime" name="tickets" id="showTime" [ngClass]="{'is-invalid': submitted && ticketBookingForm.controls['showTime'].errors}">
                 <option value="09:00AM">09:00AM</option>
-                <option value="12:00AM">12:00AM</option>
-                <option value="04:00AM">04:00AM</option>
-                <option value="10:30AM">10:30AM</option>
+                <option value="12:00AM">12:00PM</option>
+                <option value="04:00AM">04:00PM</option>
+                <option value="10:30AM">10:30PM</option>
             </select><br>
             <div *ngIf="submitted && ticketBookingForm.controls['showTime'].errors" class="text-danger">
                 <div *ngIf="submitted && ticketBookingForm.controls['showTime'].errors['required']">
