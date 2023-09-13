@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './Components/login/login.component';
 import { SignupComponent } from './Components/signup/signup.component';
 import { BookticketComponent } from './Components/bookticket/bookticket.component';
@@ -13,6 +13,7 @@ import { FooterComponent } from './Components/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CheckoutComponent } from './Components/checkout/checkout.component';
 import { BookingConfirmComponent } from './Components/booking-confirm/booking-confirm.component';
+import { GetUserBookingsComponent } from './Components/get-user-bookings/get-user-bookings.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { BookingConfirmComponent } from './Components/booking-confirm/booking-co
     FooterComponent,
 
     CheckoutComponent,
-    BookingConfirmComponent
+    BookingConfirmComponent,
+    GetUserBookingsComponent
   ],
   imports: [
     BrowserModule,

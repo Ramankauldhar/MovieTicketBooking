@@ -1,8 +1,11 @@
-<h1 class="text-white" style="text-align:center; text-justify: auto; height: 100px; background-color:rgb(89, 123, 232); font-size:80px;">Cineplex</h1>
+<h1 class="text-white"
+  style="text-align:center; text-justify: auto; height: 100px; background-color:rgb(89, 123, 232); font-size:80px;">
+  Cineplex</h1>
 <header>
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(244, 70, 47);">
     <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -11,8 +14,11 @@
           <li class="nav-item p1">
             <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
           </li>
-          <li class="nav-item p2">
+          <li class="nav-item p2" *ngIf="!isLoggedIn()">
             <a class="nav-link text-white" routerLink="/login">LogIn</a>
+          </li>
+          <li class="nav-item p2" *ngIf="isLoggedIn()">
+            <a class="nav-link text-white" routerLink="/bookings">Bookings</a>
           </li>
           <li class="nav-item p2" *ngIf="isLoggedIn()">
             <a class="nav-link text-white" (click)="logout()">LogOut</a>

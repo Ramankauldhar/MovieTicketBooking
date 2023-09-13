@@ -8,14 +8,14 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   private isAuthenticated: boolean = false;
- 
+
   //I want to save the userEmail
-  private userEmail:string='';
+  private userEmail: string = '';
 
-  constructor(private http:HttpClient) { }
-  
+  constructor(private http: HttpClient) { }
 
-  setUserEmail(email:string){
+
+  setUserEmail(email: string) {
     this.userEmail = email;
     localStorage.setItem('email', email)
   }
@@ -30,15 +30,18 @@ export class AuthService {
     return this.isAuthenticated;
   }
 
-  register(data:any):Observable<any>{
+  register(data: any): Observable<any> {
     return this.http.post('https://movieticketbookingbackend.onrender.com/auth/register', data);
   }
-  login(data:any):Observable<any>{
+  login(data: any): Observable<any> {
     this.isAuthenticated = true;
-    return this.http.post('https://movieticketbookingbackend.onrender.com/auth/login',data);
+    return this.http.post('https://movieticketbookingbackend.onrender.com/auth/login', data);
   }
-  booking(data:any):Observable<any> {
-    return this.http.post('https://movieticketbookingbackend.onrender.com/auth/bookticket',data);
+  booking(data: any): Observable<any> {
+    return this.http.post('https://movieticketbookingbackend.onrender.com/auth/bookticket', data);
+  }
+  getUserbookings(data: any): Observable<any> {
+    return this.http.post('https://movieticketbookingbackend.onrender.com/auth/bookings', data);
   }
 
   logout() {

@@ -1,25 +1,29 @@
-*{
+* {
     overflow: hidden;
 }
 
-header{
+header {
     justify-content: space-between;
     align-items: center;
     padding: 0px 0px;
-    background-color:aliceblue;
+    background-color: aliceblue;
 }
- .navbar-nav li{
+
+.navbar-nav li {
     padding-right: 10px;
- }
- @media screen and (max-width:1100px) {
-    .t{
-        width:100%;
+}
+
+@media screen and (max-width:1100px) {
+    .t {
+        width: 100%;
     }
-    .row{
+
+    .row {
         display: block;
     }
-    .card{
+
+    .card {
         display: block;
-        width:100%;
+        width: 100%;
     }
- }
+}
