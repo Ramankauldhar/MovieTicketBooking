@@ -3,8 +3,9 @@
 
     <div class="row mt-3 pt-2 px-2 text-white" style="background-color: rgb(21, 86, 229);">
       <h2>Now Playing Movies</h2>
+      <p>Book Your Tickets now!</p>
       <div class="t col-md-3 mt-3" *ngFor="let movies of NowPlayingMoviesData?.results; let i=index">
-        <div class="card bg-light" *ngIf="i<8" style="min-height: 520px;">
+        <div class="card bg-light" *ngIf="i<8" style="min-height: 580px;">
           <img src="{{ movies.backdrop_path }}" class="card-img-top" alt="images" />
 
           <div class="card-body">
@@ -48,8 +49,6 @@
             <h5 class="card-title text-info">{{movies.title}}</h5>
             <p><span class="text-info">Overview: </span><i>{{ movies.overview.length > 100 ? (movies.overview |
                 slice:0:100) + '...' : movies.overview }}</i></p>
-            <p><span class="text-info">Language:</span> <span class="p-1"
-                style="background-color: azure;"><b>{{movies.original_language}}</b></span></p>
           </div>
         </div>
       </div>

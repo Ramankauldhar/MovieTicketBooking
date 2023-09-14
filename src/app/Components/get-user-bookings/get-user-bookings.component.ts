@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GetBookingsService } from 'src/app/service/get-bookings.service';
+import { GetBookingsService } from '../../service/get-bookings.service';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-get-user-bookings',
@@ -9,21 +10,24 @@ import { GetBookingsService } from 'src/app/service/get-bookings.service';
 export class GetUserBookingsComponent implements OnInit {
   bookings: any[] = [];
 
-  constructor(private bookingService: GetBookingsService) { }
+  constructor(private bookingService: GetBookingsService, private authService: AuthService) { }
 
-  ngOnInit() {
-    this.fetchUserBookings();
-  }
+  ngOnInit(): void {
+    const email = this.authService.getUserEmail();
 
-  fetchUserBookings() {
-    this.bookingService.getUserBookings().subscribe(
-      (data) => {
-        // Handle the data from the API response
-        this.bookings = data; // Assuming the API returns an array of bookings
+    this.bookingService.getUserBookings(email).subscribe(
+      (response: any) => {
+        if (response.success) {
+          this.bookings = response.data;
+          console.log('Received bookings:', this.bookings);
+        } else {
+          // Handle error, e.g., display an error message
+          console.error('Failed to fetch bookings:', response.message);
+        }
       },
-      (error) => {
-        // Handle errors
-        console.error('Error fetching user bookings', error);
+      (error: any) => {
+        // Handle HTTP error, e.g., display an error message
+        console.error('HTTP request failed:', error);
       }
     );
   }

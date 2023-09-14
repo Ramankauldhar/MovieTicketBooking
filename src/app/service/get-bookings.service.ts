@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
@@ -9,11 +9,16 @@ import { AuthService } from './auth.service';
 export class GetBookingsService {
   constructor(private http: HttpClient, private authService: AuthService) { }
 
-  getUserBookings(): Observable<any> {
-    const userData = {
-      email: this.authService.getUserEmail() // Get user email from AuthService
-    };
+  // Add a method to set the Authorization header with a JWT token
+  private getHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token') || '';
+    return new HttpHeaders()
+      .set('Authorization', `Bearer ${token}`)
+  }
 
-    return this.http.post('https://movieticketbookingbackend.onrender.com/auth/bookings', userData);
+  getUserBookings(email: string): Observable<any> {
+    const headers = this.getHeaders(); // Get the headers with the Authorization header
+    const options = { headers: headers };
+    return this.http.get(`https://movieticketbookingbackend.onrender.com/auth/bookings/${email}`, options);
   }
 }
